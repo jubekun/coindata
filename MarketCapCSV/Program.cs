@@ -110,6 +110,12 @@ namespace MarketCapCSV {
 			var document = parser.Parse(webSrc);
 			var table = document.GetElementById("historical-data");
 			foreach (var tr in table.GetElementsByTagName("tr")) {
+				
+				if(tr.ChildNodes.Length <= 13) {
+					Debug.WriteLine("caution !! -- " + uri);
+					continue;
+				}
+
 				var datestr = tr.ChildNodes[1].TextContent;
 				var mcapstr = tr.ChildNodes[13].TextContent;
 				var volmstr = tr.ChildNodes[11].TextContent;
